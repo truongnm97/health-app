@@ -4,7 +4,7 @@ type TSignInParams = {
 }
 
 type TSignInResponse = {
-  access_token: string
+  email: string
 }
 
 type TSignUpParams = {
@@ -23,11 +23,5 @@ type TSignUpResponse = {
 }
 
 type TUser = {
-  id: string
   email: string
-  firstName: string
-  lastName: string
-  role: string
-  createdAt: string
-  updatedAt: string
 }

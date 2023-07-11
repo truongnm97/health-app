@@ -2,6 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   header {
     height: 64px;
@@ -45,6 +46,10 @@
           display: flex;
           align-items: center;
           position: relative;
+
+          .image-ctn {
+            display: flex;
+          }
 
           & img[alt=Menu] {
             cursor: pointer;
@@ -97,6 +102,18 @@
                 }
               }
             }
+          }
+        }
+
+        .menu-sign-out {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 1rem;
+          cursor: pointer;
+
+          img {
+            width: 26px;
           }
         }
       }

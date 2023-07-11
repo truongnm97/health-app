@@ -29,38 +29,33 @@ function getListPaging<T>(
 }
 
 export default [
-  rest.get(API_PATH.USER, (_, res, ctx) => {
-    const isAuthenticated = localStorage.getItem('is-authenticated')
-
-    if (!isAuthenticated) {
-      return res(
-        ctx.status(403),
-        ctx.json({
-          errorMessage: 'Not authorized',
-        }),
-      )
+  rest.get<null, never, TUserMealList>(API_PATH.USER_MEALS, (req, res, ctx) => {
+    const email = req.headers.get('email')
+    if (!email) {
+      return res(ctx.status(401))
     }
 
-    return res(
-      ctx.status(200),
-      ctx.json({
-        username: 'admin',
-      }),
-    )
-  }),
-
-  rest.get<null, never, TUserMealList>(API_PATH.USER_MEALS, (req, res, ctx) => {
     const page = req.url.searchParams.get('page')
     const pageSize = req.url.searchParams.get('pageSize')
 
     return res(ctx.status(200), ctx.json(getListPaging(MEALS_RESPONSE, page, pageSize)))
   }),
 
-  rest.get<null, never, TUserMeal>(API_PATH.USER_MEAL, (_, res, ctx) => {
+  rest.get<null, never, TUserMeal>(API_PATH.USER_MEAL, (req, res, ctx) => {
+    const email = req.headers.get('email')
+    if (!email) {
+      return res(ctx.status(401))
+    }
+
     return res(ctx.status(200), ctx.json(MEALS_RESPONSE[2]))
   }),
 
-  rest.get<null, never, TUserRecord>(API_PATH.USER_RECORD, (_, res, ctx) => {
+  rest.get<null, never, TUserRecord>(API_PATH.USER_RECORD, (req, res, ctx) => {
+    const email = req.headers.get('email')
+    if (!email) {
+      return res(ctx.status(401))
+    }
+
     return res(
       ctx.status(200),
       ctx.json({
@@ -72,6 +67,11 @@ export default [
   }),
 
   rest.get<null, never, TUserDiaries>(API_PATH.USER_DIARIES, (req, res, ctx) => {
+    const email = req.headers.get('email')
+    if (!email) {
+      return res(ctx.status(401))
+    }
+
     const page = req.url.searchParams.get('page')
     const pageSize = req.url.searchParams.get('pageSize')
 
@@ -79,6 +79,11 @@ export default [
   }),
 
   rest.get<null, never, TUserExerciseList>(API_PATH.USER_EXERCISES, (req, res, ctx) => {
+    const email = req.headers.get('email')
+    if (!email) {
+      return res(ctx.status(401))
+    }
+
     const page = req.url.searchParams.get('page')
     const pageSize = req.url.searchParams.get('pageSize')
 
@@ -86,6 +91,11 @@ export default [
   }),
 
   rest.get<null, never, TUserRecommendationList>(API_PATH.USER_RECOMMENDATIONS, (req, res, ctx) => {
+    const email = req.headers.get('email')
+    if (!email) {
+      return res(ctx.status(401))
+    }
+
     const page = req.url.searchParams.get('page')
     const pageSize = req.url.searchParams.get('pageSize')
 

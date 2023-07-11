@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { PATH } from 'utils'
 import { HomeScreen, RecommendationScreen, RecordScreen } from 'screens'
 import { MainLayout } from 'components'
+import SignInScreen from 'screens/SignInScreen/SignInScreen'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
         element: <RecommendationScreen />,
       },
     ],
+  },
+  {
+    path: PATH.SIGN_IN,
+    element: <SignInScreen />,
   },
 ])
 

@@ -1,0 +1,70 @@
+.ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(33deg, #FFCC21 0%, #FF963C 100%);
+  ;
+  position: relative;
+
+  .sign-in-modal {
+    margin: 0 1rem;
+    max-width: 100%;
+    width: 350px;
+    min-height: 300px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 30px 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .18);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: space-between;
+
+    .image-ctn {
+      text-align: center;
+
+      img {
+        width: 150px;
+      }
+    }
+
+    .forgot-password {
+      text-align: right;
+
+      a {
+        color: var(--color-primary-400);
+        font-weight: bold;
+        font-size: 0.75rem;
+      }
+    }
+
+    .input-ctn {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      input {
+        outline: none;
+        border-radius: 0;
+        height: 2.5rem;
+        border: 1px solid #d9d9d9;
+        padding: 0 1rem;
+      }
+
+      .error-text {
+        color: red;
+        font-size: 12px;
+        text-align: center;
+      }
+    }
+
+    .sign-in-btn {
+      button {
+        width: 100%;
+        font-weight: bold;
+        font-family: Inter;
+      }
+    }
+  }
+}

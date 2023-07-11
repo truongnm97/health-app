@@ -1,18 +1,29 @@
-import { Link, Outlet, useLocation } from 'react-router-dom'
+import { Link, Navigate, Outlet, useLocation } from 'react-router-dom'
 import classes from './MainLayout.module.scss'
 import { PATH } from 'utils'
-import { Badge } from 'components'
+import { Badge, Loading } from 'components'
 import clsx from 'clsx'
 import { useEffect, useRef, useState } from 'react'
 import BackTop from '../BackTop'
+import { useGetMe, useSignOut } from 'api'
 
 export default function MainLayout() {
   const { pathname } = useLocation()
   const [showSubMenu, setShowSubMenu] = useState(false)
   const subMenuRef = useRef<HTMLDivElement>(null)
+  const { data: user, isFetched: userFetched, isFetching: userFetching } = useGetMe()
+  const { mutate: signOut } = useSignOut()
 
   const handleShowSubMenu = () => {
     setShowSubMenu(!showSubMenu)
+  }
+
+  const handleSignOut = () => {
+    const isConfirmed = confirm('Do you want to sign out?')
+
+    if (isConfirmed) {
+      signOut({})
+    }
   }
 
   useEffect(() => {
@@ -29,8 +40,13 @@ export default function MainLayout() {
     }
   }, [])
 
+  if (userFetched && (!user || !user.email)) {
+    return <Navigate to={PATH.SIGN_IN} />
+  }
+
   return (
     <div className={classes.mainLayout}>
+      <Loading isLoading={userFetching} overlay />
       <header>
         <div className={classes.header}>
           <Link to={PATH.HOME} className={classes.logo}>
@@ -49,7 +65,7 @@ export default function MainLayout() {
               </Link>
             ))}
             <div className={classes.menuMore} ref={subMenuRef}>
-              <div onClick={handleShowSubMenu}>
+              <div className={classes.imageCtn} onClick={handleShowSubMenu}>
                 {showSubMenu ? (
                   <img src='/icons/icon-close.png' alt='Menu' />
                 ) : (
@@ -88,6 +104,9 @@ export default function MainLayout() {
                   <Link to='#'>設定</Link>
                 </li>
               </ul>
+            </div>
+            <div className={classes.menuSignOut} onClick={handleSignOut} title='Sign Out'>
+              <img src='/icons/icon-sign-out.png' alt='Sign Out' />
             </div>
           </div>
         </div>

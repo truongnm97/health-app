@@ -10,9 +10,9 @@ export const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use((config) => {
   if (config.headers) {
-    const accessToken = getStorage('access_token')
-    if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`
+    const email = getStorage('email')
+    if (email) {
+      config.headers['email'] = email
     }
   }
 
