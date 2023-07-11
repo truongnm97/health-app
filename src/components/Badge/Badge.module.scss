@@ -1,0 +1,18 @@
+.badge {
+  position: relative;
+
+  .icon {
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    top: 0;
+    right: -0.5rem;
+    border-radius: 50%;
+    background-color: var(--color-primary-500);
+    font-size: 0.625rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1rem;
+    color: white;
+  }
+}

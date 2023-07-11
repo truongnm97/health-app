@@ -1,0 +1,152 @@
+.main-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    height: 64px;
+    background-color: var(--color-dark-500);
+    display: flex;
+    justify-content: center;
+    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.16);
+    padding: 0 1rem;
+
+    .header {
+      max-width: 960px;
+      display: flex;
+      flex: 1;
+      justify-content: space-between;
+      align-items: center;
+
+      .logo {
+        padding: 16px 19px 8px 16px;
+      }
+
+      .menu {
+        display: flex;
+
+        .menu-item {
+          display: none;
+          padding: 0.5rem 1rem 0.5rem 0.5rem;
+          display: none;
+          align-items: center;
+          gap: 0.5rem;
+          color: white;
+          min-width: 160px;
+          box-sizing: border-box;
+          font-family: Hiragino Kaku Gothic Pro;
+
+          &.active {
+            color: var(--color-primary-400);
+          }
+        }
+
+        .menu-more {
+          display: flex;
+          align-items: center;
+          position: relative;
+
+          & img[alt=Menu] {
+            cursor: pointer;
+          }
+
+          ul.sub-menu {
+            position: absolute;
+            list-style: none;
+            min-width: 280px;
+            padding: 0;
+            margin: 0;
+            top: 40px;
+            right: 0;
+            background-color: #777777;
+            display: none;
+            z-index: 1;
+
+            &.show {
+              display: block;
+            }
+
+            & li {
+              min-height: 72px;
+              padding: 0 2rem;
+              border-top: 1px solid rgba($color: #fff, $alpha: 0.15);
+              border-bottom: 1px solid rgba($color: #2E2E2E, $alpha: 0.25);
+              font-family: Hiragino Kaku Gothic Pro;
+
+              & a {
+                min-height: 72px;
+                line-height: 72px;
+                font-size: 1.125rem;
+                color: white;
+                display: block;
+              }
+
+              &.menu-item {
+                display: block;
+
+                a {
+                  display: flex;
+                  align-items: center;
+                  line-height: 1;
+                  padding: 0;
+                  gap: 0.5rem;
+                }
+
+                &.active a {
+                  color: var(--color-primary-400);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  footer {
+    height: 128px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-dark-500);
+    align-items: center;
+    padding: 1rem;
+    font-family: Hiragino Kaku Gothic Pro;
+
+    .footer {
+      max-width: 960px;
+      flex: 1;
+      flex-wrap: wrap;
+      display: flex;
+      gap: 44px;
+
+      .footer-item {
+        color: white;
+        font-size: 11px;
+      }
+    }
+  }
+
+  .content {
+    flex: 1;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .main-layout {
+    header {
+      .header {
+        .menu {
+          .menu-item {
+            display: flex;
+          }
+
+          .menu-more {
+            ul.sub-menu li.menu-item {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
