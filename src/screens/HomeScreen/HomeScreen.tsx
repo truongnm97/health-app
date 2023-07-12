@@ -3,19 +3,21 @@ import classes from './HomeScreen.module.scss'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { Loading } from 'components'
+import { useState } from 'react'
+import clsx from 'clsx'
 
 export default function HomeScreen() {
+  const [mealType, setMealType] = useState<TUserMealType>()
   const {
     data: meals,
     isLoading: mealsLoading,
     fetchNextPage: mealsFetchNextPage,
     hasNextPage: mealsHasNextPage,
     isFetchingNextPage: mealsFetchingNextPage,
-  } = useGetUserMeals()
+  } = useGetUserMeals(mealType)
   const { data: meal, isLoading: mealLoading, isSuccess: mealSuccess } = useGetUserMeal()
   const { data: record, isLoading: recordLoading } = useGetUserRecord()
 
-  console.log('meals', meals)
   const chartOptions: Highcharts.Options = {
     chart: {
       backgroundColor: '#2E2E2E',
@@ -168,22 +170,21 @@ export default function HomeScreen() {
       </div>
       <div className={classes.mainCtn}>
         <div className={classes.filterCtn}>
-          <div className={classes.filterItem}>
-            <img src='/icons/icon-meal.png' alt='Meal' />
-            Morning
-          </div>
-          <div className={classes.filterItem}>
-            <img src='/icons/icon-meal.png' alt='Meal' />
-            Lunch
-          </div>
-          <div className={classes.filterItem}>
-            <img src='/icons/icon-meal.png' alt='Meal' />
-            Dinner
-          </div>
-          <div className={classes.filterItem}>
-            <img src='/icons/icon-snack.png' alt='Snack' />
-            Snack
-          </div>
+          {MEAL_TYPES.map(({ imageSrc, type }) => (
+            <div
+              id={type}
+              className={clsx(classes.filterItem, type === mealType && classes.active)}
+              onClick={() => {
+                if (type === mealType) {
+                  setMealType(undefined)
+                } else {
+                  setMealType(type)
+                }
+              }}>
+              <img src={imageSrc} alt='Meal' />
+              {type}
+            </div>
+          ))}
         </div>
         <div className={classes.mealsCtn}>
           {meals?.pages.map(({ data }) =>
@@ -211,3 +212,22 @@ export default function HomeScreen() {
     </div>
   )
 }
+
+const MEAL_TYPES = [
+  {
+    type: 'Morning',
+    imageSrc: '/icons/icon-meal.png',
+  },
+  {
+    type: 'Lunch',
+    imageSrc: '/icons/icon-meal.png',
+  },
+  {
+    type: 'Dinner',
+    imageSrc: '/icons/icon-meal.png',
+  },
+  {
+    type: 'Snack',
+    imageSrc: '/icons/icon-snack.png',
+  },
+] as const

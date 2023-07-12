@@ -6,9 +6,11 @@ type TListParams = {
 type TUserMeal = {
   id: number
   date: string
-  type: 'Morning' | 'Lunch' | 'Dinner' | 'Snack'
+  type: TUserMealType
   imageSrc: string
 }
+
+type TUserMealType = 'Morning' | 'Lunch' | 'Dinner' | 'Snack'
 
 type TUserMealList = {
   data: TUserMeal[]

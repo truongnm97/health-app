@@ -3,11 +3,15 @@ import { axiosInstance } from './axios'
 import { AxiosResponse } from 'axios'
 import { API_PATH, generateURL } from '../utils'
 
-export const useGetUserMeals = (pageSize = 8, options?: TQueryOptions) => {
+export const useGetUserMeals = (
+  mealType?: TUserMealType,
+  pageSize = 8,
+  options?: TQueryOptions,
+) => {
   return useInfiniteQuery(
-    API_PATH.USER_MEALS,
+    [API_PATH.USER_MEALS, mealType, pageSize],
     ({ pageParam = 1 }) => {
-      const url = generateURL(API_PATH.USER_MEALS, { page: pageParam, pageSize })
+      const url = generateURL(API_PATH.USER_MEALS, { page: pageParam, pageSize, mealType })
 
       return axiosInstance
         .get<TUserMealList, AxiosResponse<TUserMealList>>(url)

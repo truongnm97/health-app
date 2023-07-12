@@ -37,8 +37,18 @@ export default [
 
     const page = req.url.searchParams.get('page')
     const pageSize = req.url.searchParams.get('pageSize')
+    const mealType = req.url.searchParams.get('mealType')
 
-    return res(ctx.status(200), ctx.json(getListPaging(MEALS_RESPONSE, page, pageSize)))
+    return res(
+      ctx.status(200),
+      ctx.json(
+        getListPaging(
+          MEALS_RESPONSE.filter(({ type }) => (mealType ? type === mealType : true)),
+          page,
+          pageSize,
+        ),
+      ),
+    )
   }),
 
   rest.get<null, never, TUserMeal>(API_PATH.USER_MEAL, (req, res, ctx) => {
@@ -113,19 +123,19 @@ const MEALS_RESPONSE: TUserMeal[] = [
   {
     id: 2,
     date: '05.21',
-    type: 'Morning',
+    type: 'Lunch',
     imageSrc: '/images/l03.jpg',
   },
   {
     id: 3,
     date: '05.21',
-    type: 'Morning',
+    type: 'Dinner',
     imageSrc: '/images/d01.jpg',
   },
   {
     id: 4,
     date: '05.21',
-    type: 'Morning',
+    type: 'Snack',
     imageSrc: '/images/l01.jpg',
   },
   {
@@ -137,67 +147,67 @@ const MEALS_RESPONSE: TUserMeal[] = [
   {
     id: 6,
     date: '05.20',
-    type: 'Morning',
+    type: 'Lunch',
     imageSrc: '/images/l02.jpg',
   },
   {
     id: 7,
     date: '05.20',
-    type: 'Morning',
+    type: 'Dinner',
     imageSrc: '/images/d02.jpg',
   },
   {
     id: 8,
     date: '05.20',
-    type: 'Morning',
+    type: 'Snack',
     imageSrc: '/images/s01.jpg',
   },
   {
     id: 9,
-    date: '05.21',
+    date: '05.19',
     type: 'Morning',
     imageSrc: '/images/m01.jpg',
   },
   {
     id: 10,
-    date: '05.21',
-    type: 'Morning',
+    date: '05.19',
+    type: 'Lunch',
     imageSrc: '/images/l03.jpg',
   },
   {
     id: 11,
-    date: '05.21',
-    type: 'Morning',
+    date: '05.19',
+    type: 'Dinner',
     imageSrc: '/images/d01.jpg',
   },
   {
     id: 12,
-    date: '05.21',
-    type: 'Morning',
+    date: '05.19',
+    type: 'Snack',
     imageSrc: '/images/l01.jpg',
   },
   {
     id: 13,
-    date: '05.20',
+    date: '05.18',
     type: 'Morning',
     imageSrc: '/images/m02.jpg',
   },
   {
     id: 14,
-    date: '05.20',
-    type: 'Morning',
+    date: '05.18',
+    type: 'Lunch',
     imageSrc: '/images/l02.jpg',
   },
   {
     id: 15,
-    date: '05.20',
-    type: 'Morning',
+    date: '05.18',
+    type: 'Dinner',
     imageSrc: '/images/d02.jpg',
   },
   {
     id: 16,
-    date: '05.20',
-    type: 'Morning',
+    date: '05.18',
+    type: 'Snack',
     imageSrc: '/images/s01.jpg',
   },
 ]

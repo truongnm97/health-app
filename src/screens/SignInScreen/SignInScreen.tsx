@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import classes from './SignInScreen.module.scss'
-import { Link, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { PATH } from 'utils'
 import { useGetMe, useSignIn } from 'api'
 import { Loading } from 'components'
@@ -37,9 +37,9 @@ export default function SignInScreen() {
     <div className={classes.ctn}>
       <Loading isLoading={userLoading} overlay />
       <form className={classes.signInModal} onSubmit={handleSubmitLogin}>
-        <Link to={PATH.HOME} className={classes.imageCtn}>
+        <div className={classes.imageCtn}>
           <img src='/icons/logo.png' alt='Logo' />
-        </Link>
+        </div>
         <div className={classes.inputCtn}>
           <input
             type='email'

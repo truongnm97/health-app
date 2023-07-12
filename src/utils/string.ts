@@ -14,7 +14,7 @@ export const generatePath = (url: string, data: any) => {
 export function generateURL(url: string, params: any) {
   // Add query string parameters
   const queryString = Object.keys(params)
-    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(params[key] || ''))
     .join('&')
 
   // Append query string to URL
